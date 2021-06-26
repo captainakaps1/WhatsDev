@@ -4,84 +4,71 @@ import PropTypes from "prop-types";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addComment } from "../../store/actions/postActions";
 
-class CommentForm extends Component {
-  constructor(props) {
-    super(props);
+function CommentForm(props) {
+  const [state, setState] = React.useState({
+    text: "",
+    errors: {},
+  });
 
-    this.state = {
-      text: "",
-      errors: {}
-    };
-  }
-
-  onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
+  const onChange = (e) => {
+    setState({
+      [e.target.name]: e.target.value,
     });
   };
 
-  onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    const { user } = this.props.auth;
-    const { postID } = this.props;
+    const { user } = props.auth;
+    const { postID } = props;
     const newComment = {
-      text: this.state.text,
+      text: state.text,
       name: user.name,
-      avatar: user.avatar
+      avatar: user.avatar,
     };
 
-    this.props.addComment(postID, newComment);
-    this.setState({
-      text: ""
+    props.addComment(postID, newComment);
+    setState({
+      text: "",
     });
   };
 
-  render() {
-    const { errors } = this.props;
-    return (
-      <div className="post-form mb-3">
-        <div className="card card-info">
-          <div className="card-header bg-dark text-white">Say Something...</div>
-          <div className="card-body">
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <TextAreaFieldGroup
-                  placeholder="Add a comment"
-                  name="text"
-                  value={this.state.text}
-                  onChange={this.onChange}
-                  error={errors.text}
-                />
-              </div>
-              <button
-                type="submit"
-                value="submit"
-                className="btn btn-secondary"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+  const { errors } = props;
+  return (
+    <div className="post-form mb-3">
+      <div className="card card-info">
+        <div className="card-header bg-dark text-white">Say Something...</div>
+        <div className="card-body">
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <TextAreaFieldGroup
+                placeholder="Add a comment"
+                name="text"
+                value={state.text}
+                onChange={onChange}
+                error={errors.text}
+              />
+            </div>
+            <button type="submit" value="submit" className="btn btn-secondary">
+              Submit
+            </button>
+          </form>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 CommentForm.propTypes = {
   auth: PropTypes.object.isRequired,
   postID: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired,
-  addComment: PropTypes.func.isRequired
+  addComment: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { addComment }
-)(CommentForm);
+export default connect(mapStateToProps, { addComment })(CommentForm);
