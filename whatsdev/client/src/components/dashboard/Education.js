@@ -5,13 +5,13 @@ import Moment from "react-moment";
 import { deleteEducation } from "../../store/actions/profileActions";
 
 class Education extends Component {
-  onDelete = exp_id => {
+  onDelete = (exp_id) => {
     if (window.confirm("Are you sure you want this education"))
       this.props.deleteEducation(exp_id);
   };
 
   render() {
-    const education = this.props.education.map(edu => (
+    const education = this.props.education.map((edu) => (
       <tr key={edu._id}>
         <td>{edu.school}</td>
         <td>{edu.fieldofstudy}</td>
@@ -49,10 +49,7 @@ class Education extends Component {
   }
 }
 Education.propTypes = {
-  deleteEducation: PropTypes.func.isRequired
+  deleteEducation: PropTypes.func.isRequired,
 };
 
-export default connect(
-  null,
-  { deleteEducation }
-)(Education);
+export default connect(null, { deleteEducation })(Education);
