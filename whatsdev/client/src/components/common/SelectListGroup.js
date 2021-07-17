@@ -3,16 +3,16 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 
 const SelectListGroup = ({ name, value, error, onChange, options }) => {
-  const selectOptions = options.map(option => (
+  const selectOptions = options.map((option) => (
     <option key={option.label} value={option.value}>
       {option.label}
     </option>
   ));
   return (
-    <div className="form-group">
+    <div className="form-group" data-testid="Select-List_Group-div">
       <select
         className={classnames("form-control form-control-lg", {
-          "is-invalid": error
+          "is-invalid": error,
         })}
         name={name}
         value={value}
@@ -29,11 +29,11 @@ SelectListGroup.propTypes = {
   value: PropTypes.string.isRequired,
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.array.isRequired
+  options: PropTypes.array.isRequired,
 };
 
 SelectListGroup.defaultProps = {
-  type: "text"
+  type: "text",
 };
 
 export default SelectListGroup;

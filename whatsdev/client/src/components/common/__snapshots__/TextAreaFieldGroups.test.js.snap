@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component Test - InputGroup matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="form-group"
+    data-testid="Test-Area-Field-Group-div"
+  >
+    <textarea
+      class="form-control form-control-lg"
+      name=""
+      placeholder=""
+    />
+  </div>
+</DocumentFragment>
+`;

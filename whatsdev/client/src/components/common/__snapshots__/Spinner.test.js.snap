@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component Test - InputGroup matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <img
+      alt="Loading..."
+      src="loading.gif"
+      style="width: 100px; margin: auto; display: block;"
+    />
+  </div>
+</DocumentFragment>
+`;
